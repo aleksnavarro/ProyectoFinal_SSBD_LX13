@@ -22,4 +22,12 @@ def contacto():
 
     return jsonify(resultado)
 
+@app.route("/detalles/",methods=['GET'])
+def detalles():
+    cto=Contacto(conexion,cursor)
+    resultado=cto.recuperar()
+    print(resultado)
+
+    return jsonify(resultado)
+
 app.run(debug=True)

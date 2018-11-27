@@ -9,14 +9,14 @@
 <ion-content padding>
   Libreta de contactos en construcción :D
 
-  <ion-card *ngFor="let i of contactos">
-    <ion-item>
-        <h2>{{i.nombre}}</h2>
-        <p>{{i.telefono}}</p>
-    </ion-item>
-  </ion-card>
+  <ion-list *ngFor="let i of contactos">
+    <ion-item (click)="clickContacto(i)">
+      <ion-avatar item-start>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+      </ion-avatar>
+      <h2>{{i.nombre}}</h2>
+      <p>{{i.telefono}}</p>
+    </ion-item>
+  </ion-list>
+
 </ion-content>
