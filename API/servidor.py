@@ -30,4 +30,9 @@ def detalles():
 
     return jsonify(resultado)
 
+@app.route("/agregar/",methods=['GET'])
+def agregar():
+
+    return respuesta
+
 app.run(debug=True)

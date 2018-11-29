@@ -1,18 +1,21 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Contactos
+      Lista de Contactos
     </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="clickAgregar()">
+        <ion-icon name="person-add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  Libreta de contactos en construcción :D
-
   <ion-list *ngFor="let i of contactos">
     <ion-item (click)="clickContacto(i)">
       <ion-avatar item-start>
-
+        <img src="../assets/imgs/msa.png">
       </ion-avatar>
       <h2>{{i.nombre}}</h2>
       <p>{{i.telefono}}</p>

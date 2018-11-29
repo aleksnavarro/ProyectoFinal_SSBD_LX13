@@ -1,0 +1,52 @@
+<!--
+  Generated template for the AgregarPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Agregar contacto nuevo</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label stacked>Nombre</ion-label>
+      <ion-input [(ngModel)]="nombre" type="text" value=""></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Teléfono</ion-label>
+      <ion-input [(ngModel)]="telefono" type="text" value=""></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Correo</ion-label>
+      <ion-input [(ngModel)]="correo" type="text" value=""></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Facebook</ion-label>
+      <ion-input [(ngModel)]="fb" type="text" value=""></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Twitter</ion-label>
+      <ion-input [(ngModel)]="tw" type="text" value=""></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Instagram</ion-label>
+      <ion-input [(ngModel)]="ig" type="text" value=""></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Notas</ion-label>
+      <ion-input [(ngModel)]="notas" type="text" value=""></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-buttons end>
+    <button [disabled]="this.nombre.length==0" (click)="clickAgregar()"
+    ion-button round>Agregar</button>
+  </ion-buttons>
+
+</ion-content>

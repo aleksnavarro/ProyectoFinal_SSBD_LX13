@@ -7,20 +7,38 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{nombre}}</ion-title>
+    <ion-title>{{Detalles}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
-
 <ion-content padding>
-  <ion-list no-lines>
-    {{telefono}}
-    {{correo}}
-    {{fb}}
-    {{tw}}
-    {{ig}}
-    {{notas}}
-  </ion-list>
-
+    <ion-card>
+      <img src="../assets/imgs/msa.png"/>
+      <ion-card-content>
+        <ion-card-title>
+          {{nombre}}
+        </ion-card-title>
+      <ion-list>
+        <ion-item>
+          <ion-icon name="call" item-start></ion-icon>
+            {{telefono}}</ion-item>
+          <ion-item>
+          <ion-icon name="mail" item-start></ion-icon>
+            {{correo}}</ion-item>
+          <ion-item>
+          <ion-icon name="logo-facebook" item-start></ion-icon>
+            {{fb}}</ion-item>
+          <ion-item>
+          <ion-icon name="logo-twitter" item-start></ion-icon>
+            {{tw}}</ion-item>
+          <ion-item>
+          <ion-icon name="logo-instagram" item-start></ion-icon>
+            {{ig}}</ion-item>
+          <ion-item>
+          <ion-icon name="add-circle" item-start></ion-icon>
+            {{notas}}</ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
 </ion-content>
