@@ -5,7 +5,7 @@ class Contacto:
 
     def recuperar(self):
         contactos=[]
-        select=("SELECT *FROM Contactos")
+        select=("SELECT * FROM Contactos")
         self.cursor.execute(select,)
         for i in self.cursor.fetchall():
             inv={
@@ -22,6 +22,9 @@ class Contacto:
 
         return contactos
 
-    def agregar(self):
+    def agregar(self,nombre,telefono,correo,fb,tw,ig,notas):
+        insertar=("INSERT INTO Contactos(nombre,telefono,correo,fb,tw,ig,notas) VALUES(%s,%s,%s,%s,%s,%s,%s)")
+        self.cursor.execute(insertar,(nombre,telefono,correo,fb,tw,ig,notas))
+        self.conexion.commit()
 
-        return 0
+        return 'ok'

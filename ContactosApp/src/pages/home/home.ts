@@ -18,6 +18,10 @@ export class HomePage {
               public http:Http)
               {this.getContactos();}
 
+  ionViewWillEnter(){
+    this.getContactos();
+  }
+
   getContactos(){
     this.http.get('/contactos/')
     .subscribe(data=>{

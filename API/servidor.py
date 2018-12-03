@@ -22,16 +22,18 @@ def contacto():
 
     return jsonify(resultado)
 
-@app.route("/detalles/",methods=['GET'])
-def detalles():
-    cto=Contacto(conexion,cursor)
-    resultado=cto.recuperar()
-    print(resultado)
-
-    return jsonify(resultado)
-
 @app.route("/agregar/",methods=['GET'])
 def agregar():
+    nombre=request.args.get('nombre')
+    telefono=request.args.get('telefono')
+    correo=request.args.get('correo')
+    fb=request.args.get('fb')
+    tw=request.args.get('tw')
+    ig=request.args.get('ig')
+    notas=request.args.get('notas')
+
+    add=Contacto(conexion,cursor)
+    respuesta=add.agregar(nombre,telefono,correo,fb,tw,ig,notas)
 
     return respuesta
 

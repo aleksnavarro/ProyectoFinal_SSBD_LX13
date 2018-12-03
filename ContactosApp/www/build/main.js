@@ -1,13 +1,14 @@
 webpackJsonp([2],{
 
-/***/ 100:
+/***/ 101:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AgregarPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(196);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(78);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(46);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -20,6 +21,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
 /**
  * Generated class for the AgregarPage page.
  *
@@ -27,9 +30,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Ionic pages and navigation.
  */
 var AgregarPage = /** @class */ (function () {
-    function AgregarPage(navCtrl, navParams) {
+    function AgregarPage(navCtrl, navParams, http, alertCtrl, toastCtrl) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this.http = http;
+        this.alertCtrl = alertCtrl;
+        this.toastCtrl = toastCtrl;
         this.homePage = __WEBPACK_IMPORTED_MODULE_2__home_home__["a" /* HomePage */];
         this.nombre = '';
         this.telefono = '';
@@ -43,6 +49,7 @@ var AgregarPage = /** @class */ (function () {
         console.log('ionViewDidLoad AgregarPage');
     };
     AgregarPage.prototype.clickAgregar = function () {
+        var _this = this;
         console.log(this.nombre);
         console.log(this.telefono);
         console.log(this.correo);
@@ -50,30 +57,54 @@ var AgregarPage = /** @class */ (function () {
         console.log(this.tw);
         console.log(this.ig);
         console.log(this.notas);
-        this.navCtrl.setRoot(this.homePage);
+        this.http.get("/agregar/?nombre=" + this.nombre + '&telefono=' + this.telefono +
+            '&correo=' + this.correo + '&fb=' + this.fb + '&tw=' + this.tw + '&ig=' + this.ig +
+            '&notas=' + this.notas).subscribe(function (data) {
+            console.log(data.text());
+            var toast = _this.toastCtrl.create({
+                message: 'Contacto añadido correctamente.',
+                position: 'middle',
+                showCloseButton: true,
+                closeButtonText: 'Ok',
+            });
+            toast.present();
+            /*      const alerta = this.alertCtrl.create(
+                    {
+                      title:'Exito',
+                      subTitle:'Contacto añadido correctamente',
+                      buttons:['ok']
+                    }
+                  );
+                  alerta.present();*/
+        }, function (error1) { console.log("Error"); });
+        this.navCtrl.pop();
+        //this.navCtrl.setRoot(this.navCtrl.getActive().homePage);
     };
     AgregarPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-agregar',template:/*ion-inline-start:"/media/aleks/Data/Documentos/CUCEI/INNI-4Sem/I5891-SSBD/Proyecto/ContactosApp/src/pages/agregar/agregar.html"*/'<!--\n  Generated template for the AgregarPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Agregar contacto nuevo</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n  <ion-list>\n    <ion-item>\n      <ion-label stacked>Nombre</ion-label>\n      <ion-input [(ngModel)]="nombre" type="text" value=""></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label stacked>Teléfono</ion-label>\n      <ion-input [(ngModel)]="telefono" type="text" value=""></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label stacked>Correo</ion-label>\n      <ion-input [(ngModel)]="correo" type="text" value=""></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label stacked>Facebook</ion-label>\n      <ion-input [(ngModel)]="fb" type="text" value=""></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label stacked>Twitter</ion-label>\n      <ion-input [(ngModel)]="tw" type="text" value=""></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label stacked>Instagram</ion-label>\n      <ion-input [(ngModel)]="ig" type="text" value=""></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label stacked>Notas</ion-label>\n      <ion-input [(ngModel)]="notas" type="text" value=""></ion-input>\n    </ion-item>\n  </ion-list>\n\n  <ion-buttons end>\n    <button [disabled]="this.nombre.length==0" (click)="clickAgregar()"\n    ion-button round>Agregar</button>\n  </ion-buttons>\n\n</ion-content>\n'/*ion-inline-end:"/media/aleks/Data/Documentos/CUCEI/INNI-4Sem/I5891-SSBD/Proyecto/ContactosApp/src/pages/agregar/agregar.html"*/,
+            selector: 'page-agregar',template:/*ion-inline-start:"/media/aleks/Data/Documentos/CUCEI/INNI-4Sem/I5891-SSBD/Proyecto/ContactosApp/src/pages/agregar/agregar.html"*/'<!--\n  Generated template for the AgregarPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar style="background-color:#a7cbd5">\n    <ion-title>Agregar contacto nuevo</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n  <ion-list>\n    <ion-item>\n      <ion-label stacked>Nombre</ion-label>\n      <ion-input [(ngModel)]="nombre" type="text" value=""></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label stacked>Teléfono</ion-label>\n      <ion-input [(ngModel)]="telefono" type="text" value=""></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label stacked>Correo</ion-label>\n      <ion-input [(ngModel)]="correo" type="text" value=""></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label stacked>Facebook</ion-label>\n      <ion-input [(ngModel)]="fb" type="text" value=""></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label stacked>Twitter</ion-label>\n      <ion-input [(ngModel)]="tw" type="text" value=""></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label stacked>Instagram</ion-label>\n      <ion-input [(ngModel)]="ig" type="text" value=""></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label stacked>Notas</ion-label>\n      <ion-input [(ngModel)]="notas" type="text" value=""></ion-input>\n    </ion-item>\n  </ion-list>\n\n  <ion-buttons end>\n    <button [disabled]="this.nombre.length==0" (click)="clickAgregar()"\n    ion-button round>Agregar</button>\n  </ion-buttons>\n\n</ion-content>\n'/*ion-inline-end:"/media/aleks/Data/Documentos/CUCEI/INNI-4Sem/I5891-SSBD/Proyecto/ContactosApp/src/pages/agregar/agregar.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]) === "function" && _b || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* Http */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* ToastController */]])
     ], AgregarPage);
     return AgregarPage;
-    var _a, _b;
 }());
 
 //# sourceMappingURL=agregar.js.map
 
 /***/ }),
 
-/***/ 101:
+/***/ 102:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContactoPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(46);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -114,10 +145,10 @@ var ContactoPage = /** @class */ (function () {
     }
     ContactoPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-contacto',template:/*ion-inline-start:"/media/aleks/Data/Documentos/CUCEI/INNI-4Sem/I5891-SSBD/Proyecto/ContactosApp/src/pages/contacto/contacto.html"*/'<!--\n  Generated template for the ContactoPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>{{Detalles}}</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n    <ion-card>\n      <img src="../assets/imgs/msa.png"/>\n      <ion-card-content>\n        <ion-card-title>\n          {{nombre}}\n        </ion-card-title>\n      <ion-list>\n        <ion-item>\n          <ion-icon name="call" item-start></ion-icon>\n            {{telefono}}</ion-item>\n          <ion-item>\n          <ion-icon name="mail" item-start></ion-icon>\n            {{correo}}</ion-item>\n          <ion-item>\n          <ion-icon name="logo-facebook" item-start></ion-icon>\n            {{fb}}</ion-item>\n          <ion-item>\n          <ion-icon name="logo-twitter" item-start></ion-icon>\n            {{tw}}</ion-item>\n          <ion-item>\n          <ion-icon name="logo-instagram" item-start></ion-icon>\n            {{ig}}</ion-item>\n          <ion-item>\n          <ion-icon name="add-circle" item-start></ion-icon>\n            {{notas}}</ion-item>\n        </ion-list>\n      </ion-card-content>\n    </ion-card>\n</ion-content>\n'/*ion-inline-end:"/media/aleks/Data/Documentos/CUCEI/INNI-4Sem/I5891-SSBD/Proyecto/ContactosApp/src/pages/contacto/contacto.html"*/,
+            selector: 'page-contacto',template:/*ion-inline-start:"/media/aleks/Data/Documentos/CUCEI/INNI-4Sem/I5891-SSBD/Proyecto/ContactosApp/src/pages/contacto/contacto.html"*/'<!--\n  Generated template for the ContactoPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar style="background-color:#a7cbd5">\n    <ion-title>{{Detalles}}</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n    <ion-card>\n      <img src="../assets/imgs/msa.png"/>\n      <ion-card-content>\n        <ion-card-title>\n          {{nombre}}\n        </ion-card-title>\n      <ion-list>\n        <ion-item>\n          <ion-icon name="call" item-start></ion-icon>\n            {{telefono}}</ion-item>\n          <ion-item>\n          <ion-icon name="mail" item-start></ion-icon>\n            {{correo}}</ion-item>\n          <ion-item>\n          <ion-icon name="logo-facebook" item-start></ion-icon>\n            {{fb}}</ion-item>\n          <ion-item>\n          <ion-icon name="logo-twitter" item-start></ion-icon>\n            {{tw}}</ion-item>\n          <ion-item>\n          <ion-icon name="logo-instagram" item-start></ion-icon>\n            {{ig}}</ion-item>\n          <ion-item>\n          <ion-icon name="add-circle" item-start></ion-icon>\n            {{notas}}</ion-item>\n        </ion-list>\n      </ion-card-content>\n    </ion-card>\n</ion-content>\n'/*ion-inline-end:"/media/aleks/Data/Documentos/CUCEI/INNI-4Sem/I5891-SSBD/Proyecto/ContactosApp/src/pages/contacto/contacto.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */]])
     ], ContactoPage);
     return ContactoPage;
@@ -127,7 +158,7 @@ var ContactoPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 111:
+/***/ 112:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -140,11 +171,11 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 111;
+webpackEmptyAsyncContext.id = 112;
 
 /***/ }),
 
-/***/ 152:
+/***/ 153:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -168,73 +199,8 @@ function webpackAsyncContext(req) {
 webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
-webpackAsyncContext.id = 152;
+webpackAsyncContext.id = 153;
 module.exports = webpackAsyncContext;
-
-/***/ }),
-
-/***/ 196:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(77);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__contacto_contacto__ = __webpack_require__(101);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__agregar_agregar__ = __webpack_require__(100);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-var HomePage = /** @class */ (function () {
-    function HomePage(navCtrl, navParams, http) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.http = http;
-        this.contactoPage = __WEBPACK_IMPORTED_MODULE_3__contacto_contacto__["a" /* ContactoPage */];
-        this.agregarPage = __WEBPACK_IMPORTED_MODULE_4__agregar_agregar__["a" /* AgregarPage */];
-        this.contactos = [];
-        this.getContactos();
-    }
-    HomePage.prototype.getContactos = function () {
-        var _this = this;
-        this.http.get('/contactos/')
-            .subscribe(function (data) {
-            console.log(data.text());
-            _this.contactos = data.json();
-        }, function (error1) {
-            console.log('error');
-        });
-    };
-    HomePage.prototype.clickContacto = function (i) {
-        this.navCtrl.push(this.contactoPage, i);
-    };
-    HomePage.prototype.clickAgregar = function () {
-        this.navCtrl.push(this.agregarPage);
-    };
-    HomePage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"/media/aleks/Data/Documentos/CUCEI/INNI-4Sem/I5891-SSBD/Proyecto/ContactosApp/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Lista de Contactos\n    </ion-title>\n    <ion-buttons end>\n      <button ion-button icon-only (click)="clickAgregar()">\n        <ion-icon name="person-add"></ion-icon>\n      </button>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-list *ngFor="let i of contactos">\n    <ion-item (click)="clickContacto(i)">\n      <ion-avatar item-start>\n        <img src="../assets/imgs/msa.png">\n      </ion-avatar>\n      <h2>{{i.nombre}}</h2>\n      <p>{{i.telefono}}</p>\n    </ion-item>\n  </ion-list>\n\n</ion-content>\n'/*ion-inline-end:"/media/aleks/Data/Documentos/CUCEI/INNI-4Sem/I5891-SSBD/Proyecto/ContactosApp/src/pages/home/home.html"*/
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */]])
-    ], HomePage);
-    return HomePage;
-}());
-
-//# sourceMappingURL=home.js.map
 
 /***/ }),
 
@@ -259,14 +225,14 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(192);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(195);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(193);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(196);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(270);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(196);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_contacto_contacto__ = __webpack_require__(101);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_agregar_agregar__ = __webpack_require__(100);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__angular_http__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(78);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_contacto_contacto__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_agregar_agregar__ = __webpack_require__(101);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__angular_http__ = __webpack_require__(46);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -297,14 +263,14 @@ var AppModule = /** @class */ (function () {
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_9__angular_http__["b" /* HttpModule */],
-                __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* MyApp */], {}, {
+                __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* MyApp */], {}, {
                     links: [
                         { loadChildren: '../pages/agregar/agregar.module#AgregarPageModule', name: 'AgregarPage', segment: 'agregar', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/contacto/contacto.module#ContactoPageModule', name: 'ContactoPage', segment: 'contacto', priority: 'low', defaultHistory: [] }
                     ]
                 })
             ],
-            bootstrap: [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* IonicApp */]],
+            bootstrap: [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* IonicApp */]],
             entryComponents: [
                 __WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* MyApp */],
                 __WEBPACK_IMPORTED_MODULE_6__pages_home_home__["a" /* HomePage */],
@@ -314,7 +280,7 @@ var AppModule = /** @class */ (function () {
             providers: [
                 __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__["a" /* StatusBar */],
                 __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */],
-                { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["u" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* IonicErrorHandler */] }
+                { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["u" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicErrorHandler */] }
             ]
         })
     ], AppModule);
@@ -331,10 +297,10 @@ var AppModule = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(195);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(192);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(196);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(196);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(193);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(78);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -362,12 +328,80 @@ var MyApp = /** @class */ (function () {
     MyApp = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/media/aleks/Data/Documentos/CUCEI/INNI-4Sem/I5891-SSBD/Proyecto/ContactosApp/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/media/aleks/Data/Documentos/CUCEI/INNI-4Sem/I5891-SSBD/Proyecto/ContactosApp/src/app/app.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
     ], MyApp);
     return MyApp;
 }());
 
 //# sourceMappingURL=app.component.js.map
+
+/***/ }),
+
+/***/ 78:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__contacto_contacto__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__agregar_agregar__ = __webpack_require__(101);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var HomePage = /** @class */ (function () {
+    function HomePage(navCtrl, navParams, http) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.http = http;
+        this.contactoPage = __WEBPACK_IMPORTED_MODULE_3__contacto_contacto__["a" /* ContactoPage */];
+        this.agregarPage = __WEBPACK_IMPORTED_MODULE_4__agregar_agregar__["a" /* AgregarPage */];
+        this.contactos = [];
+        this.getContactos();
+    }
+    HomePage.prototype.ionViewWillEnter = function () {
+        this.getContactos();
+    };
+    HomePage.prototype.getContactos = function () {
+        var _this = this;
+        this.http.get('/contactos/')
+            .subscribe(function (data) {
+            console.log(data.text());
+            _this.contactos = data.json();
+        }, function (error1) {
+            console.log('error');
+        });
+    };
+    HomePage.prototype.clickContacto = function (i) {
+        this.navCtrl.push(this.contactoPage, i);
+    };
+    HomePage.prototype.clickAgregar = function () {
+        this.navCtrl.push(this.agregarPage);
+    };
+    HomePage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-home',template:/*ion-inline-start:"/media/aleks/Data/Documentos/CUCEI/INNI-4Sem/I5891-SSBD/Proyecto/ContactosApp/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar style="background-color:#a7cbd5">\n    <ion-title>\n      Lista de Contactos\n    </ion-title>\n    <ion-buttons end>\n      <button ion-button icon-only (click)="clickAgregar()">\n        <ion-icon name="person-add"></ion-icon>\n      </button>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-list *ngFor="let i of contactos">\n    <ion-item (click)="clickContacto(i)">\n      <ion-avatar item-start>\n        <img src="../assets/imgs/msa.png">\n      </ion-avatar>\n      <h2>{{i.nombre}}</h2>\n      <p>{{i.telefono}}</p>\n    </ion-item>\n  </ion-list>\n\n</ion-content>\n'/*ion-inline-end:"/media/aleks/Data/Documentos/CUCEI/INNI-4Sem/I5891-SSBD/Proyecto/ContactosApp/src/pages/home/home.html"*/
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */]])
+    ], HomePage);
+    return HomePage;
+}());
+
+//# sourceMappingURL=home.js.map
 
 /***/ })
 
